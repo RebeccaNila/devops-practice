@@ -1,0 +1,40 @@
+#here we want two containers, app and mysql db
+services:
+  app:
+    build:
+      context: .
+    container_name: student-app
+    ports:
+      - "6061:6061" #hostportno:containerportno
+    depends_on:
+      - mysql  # Wait for MySQL to start first
+    networks:
+      - s-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/test
+      SPRING_DATASOURCE_USERNAME: nila
+      SPRING_DATASOURCE_PASSWORD: 1234
+      restart: on-failure
+  mysql:  # ← This is the service name Containers can communicate using these service names as hostnames.
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "3304:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: nila
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: test
+    volumes:
+      - ./data/mysql:/var/lib/mysql  # Changed: Use local directory
+    networks:
+      - s-network
+    healthcheck: # Check if MySQL is ready
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+networks:
+  s-network:
+    driver: bridge
