@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devops-practice-pod
+  labels:
+    app: devops-practice
+    project: devops-practice
+
+spec:
+  containers:
+#  - name: docker-demo-app
+#    image: mysql:8.0
+#    imagePullPolicy: Never
+
+  - name: devops-practice
+    image: devops-practice:v1.0
+    imagePullPolicy: Never #IfNotPresent
+    ports:
+      - containerPort: 6061

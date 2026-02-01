@@ -1,49 +1,76 @@
-# Docker Demo - Docker Practice
+# DevOps Practice Project
 
-This is a Spring Boot REST API project used for practicing Docker and containerization concepts.
+This project is designed to practice DevOps concepts including Docker, Kubernetes, and CI/CD pipelines using a Spring Boot application.
+
+## Project Structure
+
+The project is organized as follows:
+
+*   `src/`: Java Spring Boot source code.
+*   `docker/`: Contains Docker-related configuration files.
+    *   `Dockerfile`: Instructions to build the application image.
+    *   `docker-compose.yml`: Compose file to run the application and dependencies (MySQL).
+*   `kubernetes/`: Contains Kubernetes manifests.
+    *   `pod.yml`: Pod definition for the application.
+*   `pom.xml`: Maven build configuration.
 
 ## Tech Stack
 
-*   **Java**: 21 (Recommended)
+*   **Java**: 21
 *   **Framework**: Spring Boot
 *   **Database**: MySQL
-*   **Build Tool**: Maven / Gradle
+*   **Build Tool**: Maven
+*   **Containerization**: Docker
+*   **Orchestration**: Kubernetes
+
+## Getting Started
+
+### 1. Build the Application
+
+```bash
+./mvnw clean package
+```
+
+### 2. Docker
+
+The `docker` directory contains the necessary files to containerize the application.
+
+**Build and Run with Docker Compose:**
+
+```bash
+docker-compose -f docker/docker-compose.yml up --build
+```
+
+**Build Image Manually:**
+
+```bash
+docker build -t devops-practice -f docker/Dockerfile .
+```
+
+### 3. Kubernetes
+
+The `kubernetes` directory contains manifests for deploying to a cluster.
+
+**Deploy Pod:**
+
+```bash
+kubectl apply -f kubernetes/pod.yml
+```
+
+### 4. Local Development
+
+To run locally without containers:
+1.  Ensure MySQL is running on `localhost:3306`.
+2.  Update `src/main/resources/application.properties` to point to `localhost` if necessary.
+3.  Run the application via IDE or Maven.
 
 ## Configuration
 
-The application is configured to connect to a MySQL database. Based on `application.properties`, the database URL is:
-
-```properties
-spring.datasource.url=jdbc:mysql://mysql:3306/test
-```
-
-This implies the application expects to run inside a Docker network where the database container is accessible via the hostname `mysql`.
-
-### Database Credentials
-*   **Username**: `nila`
-*   **Password**: `1234`
-*   **Database Name**: `test`
-
-## How to Run
-
-### 1. Using Docker Compose (Recommended)
-Since the app depends on a specific database host, running with Docker Compose is the easiest method. Ensure you have a `docker-compose.yml` that defines both the `app` and `mysql` services.
-
-```bash
-docker-compose up --build
-```
-
-### 2. Local Development
-If you want to run this locally (outside of Docker) via your IDE:
-1.  Ensure a MySQL instance is running on `localhost:3306`.
-2.  Update `application.properties` temporarily:
-    ```properties
-    spring.datasource.url=jdbc:mysql://localhost:3306/test
-    ```
-3.  Run the main Spring Boot application class.
+The application connects to a MySQL database.
+*   **Default URL**: `jdbc:mysql://mysql:3306/test` (Expects a container named `mysql` in the same network)
+*   **Credentials**: User `nila`, Password `1234`
 
 ## API Endpoints
 
-Once the server is running, the API is accessible at:
-`http://localhost:6061/students` Students List
-`http://localhost:6061/students/add` Add new student (default value) 
+*   List Students: `http://localhost:6061/students`
+*   Add Student: `http://localhost:6061/students/add`

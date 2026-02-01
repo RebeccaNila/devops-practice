@@ -2,6 +2,6 @@
 FROM openjdk:22-jdk
 LABEL authors="nila"
 # Copy the JAR file from target directory to container
-COPY target/student-app.jar /tmp/student-app.jar
+COPY ../target/devops-practice.jar /tmp/devops-practice.jar
 # Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "/tmp/student-app.jar"]
+ENTRYPOINT ["java", "-jar", "/tmp/devops-practice.jar"]

@@ -2,7 +2,7 @@
 services:
   app:
     build:
-      context: .
+      context: ..
     container_name: student-app
     ports:
       - "6061:6061" #hostportno:containerportno
