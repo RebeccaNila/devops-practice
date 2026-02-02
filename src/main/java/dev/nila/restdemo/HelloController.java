@@ -8,6 +8,6 @@ public class HelloController {
 
     @RequestMapping("/")
     public String greet(){
-        return "Hello, this is the Devops Practice Using Jenkins tool !!!";
+        return "Hello, this is the Devops Practice Using Jenkins tool with triggers !!!";
     }
 }
