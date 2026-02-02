@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: devops-practice
+  labels:
+    app: devops-practice
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      project: devops-practice # this name must be same with template->metadata->labels->project name
+  template:
+    metadata:
+      labels:
+        project: devops-practice
+    spec:
+      containers:
+        - name: devops-practice
+          image: devops-practice:v1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 6061

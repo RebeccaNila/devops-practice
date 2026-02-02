@@ -1,5 +1,5 @@
 # Use OpenJDK 22 as base image
-FROM openjdk:22-jdk
+FROM eclipse-temurin:21-jre
 LABEL authors="nila"
 # Copy the JAR file from target directory to container
 COPY ../target/devops-practice.jar /tmp/devops-practice.jar
