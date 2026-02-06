@@ -30,6 +30,7 @@
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+        <dockerImageName>nilarebecca/devops-practice</dockerImageName>
     </properties>
 	<dependencies>
 		<dependency>
@@ -53,6 +54,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>${dockerImageName}/devops-practice:latest</name>
+                    </image>
+                </configuration>
 			</plugin>
 		</plugins>
 	</build>
