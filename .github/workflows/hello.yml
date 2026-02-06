@@ -13,3 +13,5 @@ jobs:
       - name: Print Hello World
         #run to run command
         run: echo "Hello Wold"
+
+#after all the jobs finish it(VM) will automatically close,
