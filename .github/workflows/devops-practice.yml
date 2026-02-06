@@ -2,8 +2,6 @@ name: Devops Practice
 
 on:
   push:
-    paths:
-      - devops-practice/**
     branches:
       - 'master'
   pull_request:
