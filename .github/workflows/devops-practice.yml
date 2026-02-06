@@ -14,9 +14,6 @@ jobs:
     env:
       working-directory: ./devops-practice
       DOCKER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/devops-practice
-    defaults:
-      run:
-        working-directory: ${{ env.working-directory }}
     steps:
       - uses: actions/checkout@v4
 
